@@ -1,0 +1,27 @@
+name: Build & test the example storage engine
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: start MySQL server
+        run: |
+          sudo systemctl start mysql.service
+      - name: build
+        run: |
+          ./build.sh
+      - name: test
+        run: |
+          pip3 install -r requirements.txt
+          python3 test.py
+

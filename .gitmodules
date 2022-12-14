@@ -1,0 +1,4 @@
+[submodule "mysql-server"]
+path = mysql-server
+url = git@github.com:mysql/mysql-server.git
+ignore = dirty
